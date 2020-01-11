@@ -8,6 +8,7 @@ const App: React.FC = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <div className="number">1</div>
+				<button>Count</button>
       </header>
     </div>
   );
