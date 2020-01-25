@@ -7,7 +7,7 @@ const instanse = axios.create({
 const api = {
     counter: {
         getValue() {
-            return instanse.get("/counter").then(res => res.data);
+            return instanse.get("/counter").then(res => res.data.value);
         }
     }
 };
