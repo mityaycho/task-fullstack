@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {increase} from "./redux/counter-reducer";
+import {getInitialValue, increase} from "./redux/counter-reducer";
 import {connect} from "react-redux";
 
 const App: React.FC = (props: any) => {
+
+    useEffect(() => {
+        props.getInitialValue()
+    }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -20,4 +25,4 @@ const mstp = (state: any) => ({
    value: state.counter.value
 });
 
-export default connect(mstp, { increase })(App);
+export default connect(mstp, { increase, getInitialValue })(App);

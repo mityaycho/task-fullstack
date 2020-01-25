@@ -34,7 +34,7 @@ export const getInitialValueSuccess = (value: any) => ({
 
 export const getInitialValue = () => async (dispatch: any) => {
     let value = await api.counter.getValue();
-    dispatch(getInitialValue(value));
+    dispatch(getInitialValueSuccess(value));
 };
 
 export default reducer;
