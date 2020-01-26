@@ -3,6 +3,7 @@ import api from "../api/api";
 
 const INCREASE = 'Counter/INCREASE';
 const GET_INITIAL_VALUE_SUCCESS = 'Counter/GET_INITIAL_VALUE_SUCCESS';
+const INCREASE_VALUE_SUCCESS = 'Counter/INCREASE_VALUE_SUCCESS';
 
 const initialState = {
     value: 1
@@ -14,6 +15,9 @@ const reducer = (state = initialState, action: any) => {
             return {...state, value: state.value + 1};
 
         case GET_INITIAL_VALUE_SUCCESS:
+            return {...state, value: action.value};
+
+        case INCREASE_VALUE_SUCCESS:
             return {...state, value: action.value};
 
         default:
@@ -32,9 +36,20 @@ export const getInitialValueSuccess = (value: any) => ({
     value
 });
 
+export const increaseValueSuccess = (value: any) => ({
+    type: INCREASE_VALUE_SUCCESS,
+    value
+});
+
 export const getInitialValue = () => async (dispatch: any) => {
     let value = await api.counter.getValue();
     dispatch(getInitialValueSuccess(value));
+};
+
+export const increaseValue = () => async (dispatch: any, getState: any) => {
+    let value = getState().counter.value;
+    await api.counter.changeValue(value + 1);
+    dispatch(increaseValueSuccess(value + 1));
 };
 
 export default reducer;
