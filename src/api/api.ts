@@ -1,16 +1,24 @@
-import axios from 'axios';
+import axios, {AxiosResponse} from 'axios';
 
-const instanse = axios.create({
+interface ICounterResponse {
+    value: number;
+    maxValue: number;
+    delta: number;
+}
+
+const instance = axios.create({
     baseURL: "http://localhost:3000"
 });
 
 const api = {
     counter: {
-        getValue() {
-            return instanse.get("/counter").then(res => res.data.value);
+        async getValue(): Promise<number> {
+            let res = await instance.get<ICounterResponse>("/counter")
+                return res.data.value;
         },
-        changeValue(newValue: number) {
-            return instanse.patch("/counter", {value: newValue}).then(res => res.data.value);
+        changeValue(newValue: number): Promise<number> {
+            return instance.patch("/counter", {value: newValue})
+                .then((res: AxiosResponse<ICounterResponse>) => res.data.value);
         }
     }
 };

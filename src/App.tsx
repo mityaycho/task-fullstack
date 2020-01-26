@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import {getInitialValue, increaseValue} from "./redux/counter-reducer";
 import {connect} from "react-redux";
+import {IState} from "./redux/store";
 
 interface IMapProps {
     value: number;
@@ -32,7 +33,7 @@ const App: React.FC<IProps> = (props: any) => {
   );
 };
 
-const mstp = (state: any): IMapProps => ({
+const mstp = (state: IState): IMapProps => ({
    value: state.counter.value
 });
 

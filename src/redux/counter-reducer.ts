@@ -1,4 +1,6 @@
 import api from "../api/api";
+import {IState} from "./store";
+import {Dispatch} from "redux";
 
 const INCREASE = 'Counter/INCREASE';
 const GET_INITIAL_VALUE_SUCCESS = 'Counter/GET_INITIAL_VALUE_SUCCESS';
@@ -44,7 +46,7 @@ interface IIncreaseValueSuccessAction {
     value: number;
 }
 
-type ICounterAction = IIncreaseAction & IGetInitialValueSuccessAction & IIncreaseValueSuccessAction;
+type ICounterAction = IIncreaseAction | IGetInitialValueSuccessAction | IIncreaseValueSuccessAction;
 
 export const increase = (): IIncreaseAction => ({type: INCREASE});
 
@@ -63,7 +65,7 @@ export const getInitialValue = () => async (dispatch: any) => {
     dispatch(getInitialValueSuccess(value));
 };
 
-export const increaseValue = () => async (dispatch: any, getState: any) => {
+export const increaseValue = () => async (dispatch: Dispatch<ICounterAction>, getState: () => IState) => {
     let value = getState().counter.value;
     await api.counter.changeValue(value + 1);
     dispatch(increaseValueSuccess(value + 1));

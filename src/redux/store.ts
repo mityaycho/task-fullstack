@@ -7,6 +7,8 @@ const rootReducer = combineReducers({
     counter: reducer
 });
 
+export type IState = ReturnType<typeof rootReducer>;
+
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 export default store;
