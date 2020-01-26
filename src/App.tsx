@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {getInitialValue, increase} from "./redux/counter-reducer";
+import {getInitialValue, increase, increaseValue} from "./redux/counter-reducer";
 import {connect} from "react-redux";
 
 const App: React.FC = (props: any) => {
@@ -25,4 +25,4 @@ const mstp = (state: any) => ({
    value: state.counter.value
 });
 
-export default connect(mstp, { increase, getInitialValue })(App);
+export default connect(mstp, { increase: increaseValue, getInitialValue })(App);
