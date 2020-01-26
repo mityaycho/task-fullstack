@@ -1,15 +1,18 @@
 import api from "../api/api";
 
-
 const INCREASE = 'Counter/INCREASE';
 const GET_INITIAL_VALUE_SUCCESS = 'Counter/GET_INITIAL_VALUE_SUCCESS';
 const INCREASE_VALUE_SUCCESS = 'Counter/INCREASE_VALUE_SUCCESS';
 
-const initialState = {
+interface ICounterState {
+    value: number;
+}
+
+const initialState: ICounterState = {
     value: 1
 };
 
-const reducer = (state = initialState, action: any) => {
+const reducer = (state: ICounterState = initialState, action: ICounterAction): ICounterState => {
     switch (action.type) {
         case INCREASE:
             return {...state, value: state.value + 1};
@@ -27,16 +30,30 @@ const reducer = (state = initialState, action: any) => {
     return state;
 };
 
-export const increase = () => ({
-    type: INCREASE
-});
+interface IIncreaseAction {
+    type: typeof INCREASE;
+}
 
-export const getInitialValueSuccess = (value: any) => ({
+interface IGetInitialValueSuccessAction {
+    type: typeof GET_INITIAL_VALUE_SUCCESS;
+    value: number;
+}
+
+interface IIncreaseValueSuccessAction {
+    type: typeof INCREASE_VALUE_SUCCESS;
+    value: number;
+}
+
+type ICounterAction = IIncreaseAction & IGetInitialValueSuccessAction & IIncreaseValueSuccessAction;
+
+export const increase = (): IIncreaseAction => ({type: INCREASE});
+
+export const getInitialValueSuccess = (value: number): IGetInitialValueSuccessAction => ({
     type: GET_INITIAL_VALUE_SUCCESS,
     value
 });
 
-export const increaseValueSuccess = (value: any) => ({
+export const increaseValueSuccess = (value: number): IIncreaseValueSuccessAction => ({
     type: INCREASE_VALUE_SUCCESS,
     value
 });

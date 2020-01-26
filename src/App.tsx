@@ -1,10 +1,21 @@
 import React, {useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {getInitialValue, increase, increaseValue} from "./redux/counter-reducer";
+import {getInitialValue, increaseValue} from "./redux/counter-reducer";
 import {connect} from "react-redux";
 
-const App: React.FC = (props: any) => {
+interface IMapProps {
+    value: number;
+}
+
+interface IDispatchProps {
+    increase: () => void;
+    getInitialValue: () => void;
+}
+
+type IProps = IMapProps & IDispatchProps;
+
+const App: React.FC<IProps> = (props: any) => {
 
     useEffect(() => {
         props.getInitialValue()
@@ -21,7 +32,7 @@ const App: React.FC = (props: any) => {
   );
 };
 
-const mstp = (state: any) => ({
+const mstp = (state: any): IMapProps => ({
    value: state.counter.value
 });
 
