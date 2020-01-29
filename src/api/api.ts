@@ -1,4 +1,4 @@
-import axios, {AxiosResponse} from 'axios';
+import axios, {AxiosResponse} from "axios";
 
 interface ICounterResponse {
     value: number;

@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from "react";
+import logo from "./logo.svg";
+import "./App.css";
 import {getInitialValue, increaseValue} from "./redux/counter-reducer";
 import {connect} from "react-redux";
 import {IState} from "./redux/store";
